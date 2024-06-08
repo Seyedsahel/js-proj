@@ -134,9 +134,33 @@ html::-webkit-scrollbar-thumb{
 section{
     padding: 2rem 7%;
 }
-.heading{
+.product .heading h2{
     text-align: center;
-    font-size: 2.6rem;
-    margin-bottom: 3rem;
+    font-weight: bolder;
+    font-size: 5rem;
+    margin-top: 5rem;
     color: var(--black);
+    text-shadow: var(--box-shadow);
+}
+#productCads{
+    margin-top: 50px;
+    display: flex;
+    /* gap: 20px; */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   
+}
+#cardTitle{
+    font-size: 3rem;
+    font-weight: bolder;
+
+}
+#cardDes{
+    font-size: 15px;
+}
+#cardBtn{
+    width: 150px;
+    font-size: 15px;
+    background-color:  #ffc96f;
 }
