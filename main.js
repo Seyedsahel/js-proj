@@ -21,7 +21,7 @@ const productsData = [{
 {
   id:3,
   img:"images/3.png",
-  title:"macha",
+  title:"Bubble Tea",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
 },
 {
@@ -57,7 +57,7 @@ function itemdis() {
         e => 
         `
         <div class="card" style="width: 24rem; margin: 20px;">
-  <img src="${e.img}" Onmouseover="ChangeImage${e.id}()" Onmouseout="RestoreImage${e.id}()" class="card-img-top" alt="${e.title}">
+  <img src="${e.img}" Onmouseover="ChangeImage(this)" Onmouseout="RestoreImage()" class="card-img-top" alt="${e.title}">
   <div class="card-body">
     <h5 id="cardTitle" class="card-title">${e.title}</h5>
     <p id="cardDes" class="card-text">${e.description}</p>
@@ -71,70 +71,67 @@ function itemdis() {
 
 const imgs = document.querySelectorAll(".card-img-top")
 
-function ChangeImage1() {
+function ChangeImage(img) {
   
-    imgs[0].src = "images/replaceImg.jpg";
+    img.src = "images/replaceImg.jpg";
     
 }
 
-function RestoreImage1() {
+function RestoreImage() {
   for (let i = 0; i < imgs.length; i++) {
     imgs[i].src = productsData[i].img;
   }
 }
+// dl mode
+const dlbutton = document.getElementById("dlmode")
+//false => light / true =>dark
+let isClicked = true
+dlbutton.onclick = () => {
+  if (isClicked){
+    const lightback = document.querySelectorAll(".light-back") 
+    lightback.forEach((e) => {
+      e.classList.remove("light-back")
+      e.classList.add("dark-back")
+    })
+    const lightcolor = document.querySelectorAll(".light-color") 
+    lightcolor.forEach((e) => {
+      e.classList.remove("light-color")
+      e.classList.add("dark-color")
+    })
+  
+    document.querySelector(".home").style.backgroundColor = "#FFBF00"
+    
+    const btns = document.querySelectorAll("#cardBtn");
+    btns.forEach((e) => {
+      e.style.backgroundColor = "#FFBF00"
+    })
+    dlbutton.innerHTML="Light"
+    dlbutton.style.backgroundColor = "var(--white)"
+    dlbutton.style.color = "var(--black)"
+  }
+  else{
+    const darkback = document.querySelectorAll(".dark-back") 
+    darkback.forEach((e) => {
+      e.classList.remove("dark-back")
+      e.classList.add("light-back")
+    })
+    const darkcolor = document.querySelectorAll(".dark-color") 
+    darkcolor.forEach((e) => {
+      e.classList.remove("dark-color")
+      e.classList.add("light-color")
+    })
+  
+    document.querySelector(".home").style.backgroundColor = "#FFC96F"
+    const btns = document.querySelectorAll("#cardBtn");
+    btns.forEach((e) => {
+      e.style.backgroundColor = "#FFC96F"
+    })
+    dlbutton.innerHTML="Dark"
+    dlbutton.style.backgroundColor = "var(--black)"
+    dlbutton.style.color = "var(--white)"
+  }
+  isClicked = !isClicked
+}
+// slider
+const container=document.querySelector('.slider-container')
 
-function ChangeImage2() {
-  
-  imgs[1].src = "images/replaceImg.jpg";
-  
-}
-
-function RestoreImage2() {
-for (let i = 0; i < imgs.length; i++) {
-  imgs[i].src = productsData[i].img;
-}
-}
-function ChangeImage3() {
-  
-  imgs[2].src = "images/replaceImg.jpg";
-  
-}
-
-function RestoreImage3() {
-for (let i = 0; i < imgs.length; i++) {
-  imgs[i].src = productsData[i].img;
-}
-}
-function ChangeImage4() {
-  
-  imgs[3].src = "images/replaceImg.jpg";
-  
-}
-
-function RestoreImage4() {
-for (let i = 0; i < imgs.length; i++) {
-  imgs[i].src = productsData[i].img;
-}
-}
-function ChangeImage5() {
-  
-  imgs[4].src = "images/replaceImg.jpg";
-  
-}
-
-function RestoreImage5() {
-for (let i = 0; i < imgs.length; i++) {
-  imgs[i].src = productsData[i].img;
-}
-}
-function ChangeImage6() {
-  
-  imgs[5].src = "images/replaceImg.jpg";
-  
-}
-
-function RestoreImage6() {
-for (let i = 0; i < imgs.length; i++) {
-  imgs[i].src = productsData[i].img;
-}
-}
