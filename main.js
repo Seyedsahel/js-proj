@@ -84,6 +84,7 @@ function RestoreImage() {
 }
 // dl mode
 const dlbutton = document.getElementById("dlmode")
+const Loginbutton = document.getElementById("Login")
 //false => light / true =>dark
 let isClicked = true
 dlbutton.onclick = () => {
@@ -113,6 +114,9 @@ dlbutton.onclick = () => {
     dlbutton.innerHTML="Light"
     dlbutton.style.backgroundColor = "var(--white)"
     dlbutton.style.color = "var(--black)"
+    Loginbutton.style.backgroundColor = "var(--white)"
+    Loginbutton.style.color = "var(--black)"
+
     
   }
   else{
@@ -140,6 +144,8 @@ dlbutton.onclick = () => {
     dlbutton.innerHTML="Dark"
     dlbutton.style.backgroundColor = "var(--black)"
     dlbutton.style.color = "var(--white)"
+    Loginbutton.style.backgroundColor = "var(--black)"
+    Loginbutton.style.color = "var(--white)"
   }
   isClicked = !isClicked
 }
@@ -221,12 +227,27 @@ document.querySelectorAll(".close-login-btn").forEach( (item) => item.onclick = 
 
 //card
 const page = document.getElementById("mode")
-const cart = document.getElementById("product-cart")
+const cart_nav = document.getElementById("product-cart_nav")
 const cartPage = document.getElementById("cart-page") 
-cart.onclick = ()=>{
-  cartPage.style.display = ""
-  console.log("aghareza");
-  page.style.display = "none"
+const home_nav = document.getElementById("home-nav") 
+const contact_nav = document.getElementById("product-nav") 
+const review_nav = document.getElementById("review-nav") 
 
+cart_nav.onclick = ()=>{
+  cartPage.style.display = ""
+  page.style.display = "none"
 }
 
+home_nav.onclick = () =>{
+  cartPage.style.display = "none"
+  page.style.display = ""
+}
+
+contact_nav.onclick = () =>{
+  cartPage.style.display = "none"
+  page.style.display = ""
+}
+review_nav.onclick = () =>{
+  cartPage.style.display = "none"
+  page.style.display = ""
+}
