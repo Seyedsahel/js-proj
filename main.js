@@ -56,15 +56,15 @@ function itemdis() {
     let selecteditemsHTML = selecteditems.map(
         e => 
         `
-        <div class="card" style="width: 24rem; margin: 20px;">
-  <img src="${e.img}" Onmouseover="ChangeImage(this)" Onmouseout="RestoreImage()" class="card-img-top" alt="${e.title}">
-  <div class="card-body">
-    <h5 id="cardTitle" class="card-title">${e.title}</h5>
-    <p id="cardDes" class="card-text">${e.description}</p>
-    <a href="#" ><button id="cardBtn" class="btn">Add To Card</button></a>
-  </div>
-</div>
-`
+          <div class="card my-card light-card border-0 shadow">
+            <img src="${e.img}" Onmouseover="ChangeImage(this)" Onmouseout="RestoreImage()" class="card-img-top" alt="${e.title}">
+            <div class="card-body">
+              <h5 id="cardTitle" class="card-title">${e.title}</h5>
+              <p id="cardDes" class="card-text">${e.description}</p>
+              <a href="#" ><button id="cardBtn" class="btn">Add To Card</button></a>
+            </div>
+          </div>
+        `
     )
     sectionElement.innerHTML = selecteditemsHTML
 }
@@ -98,6 +98,11 @@ dlbutton.onclick = () => {
       e.classList.remove("light-color")
       e.classList.add("dark-color")
     })
+    const lightcard = document.querySelectorAll(".light-card") 
+    lightcard.forEach((e) => {
+      e.classList.remove("light-card")
+      e.classList.add("dark-card")
+    })
   
     document.querySelector(".home").style.backgroundColor = "#FFBF00"
     
@@ -108,6 +113,7 @@ dlbutton.onclick = () => {
     dlbutton.innerHTML="Light"
     dlbutton.style.backgroundColor = "var(--white)"
     dlbutton.style.color = "var(--black)"
+    
   }
   else{
     const darkback = document.querySelectorAll(".dark-back") 
@@ -119,6 +125,11 @@ dlbutton.onclick = () => {
     darkcolor.forEach((e) => {
       e.classList.remove("dark-color")
       e.classList.add("light-color")
+    })
+    const darkcard = document.querySelectorAll(".dark-card") 
+    darkcard.forEach((e) => {
+      e.classList.remove("dark-card")
+      e.classList.add("light-card")
     })
   
     document.querySelector(".home").style.backgroundColor = "#FFC96F"
@@ -133,5 +144,89 @@ dlbutton.onclick = () => {
   isClicked = !isClicked
 }
 // slider
-const container=document.querySelector('.slider-container')
+
+const container = document.querySelector('.slider-container');
+const slides = document.querySelectorAll('.slide');
+const arrLeft = document.querySelector('.arrow-left');
+const arrRight = document.querySelector('.arrow-right');
+
+let offset = 0;
+
+let slideIncrement = 0;
+
+let slideDecrement = slides.length - 1;
+
+arrRight.addEventListener('click', () => {
+  console.log("agareza");
+    arrRight.disabled = true;
+    offset = slides[0].offsetWidth;
+    container.style.transition = "ease-in-out 500ms"
+    container.style.right = -offset + 'px';
+
+    setTimeout(() => {
+        container.style.transition = "none";
+        slides[slideIncrement].style.order = slides.length - 1;
+        container.style.left = 0;
+        slideIncrement++;
+        slideDecrement = slideIncrement - 1;
+        
+        if (slideIncrement === slides.length){
+        slideIncrement = 0;
+        slides.forEach(slide => {
+            slide.style.order = "initial";
+        });
+        }
+        arrRight.disabled = false;
+    },500);
+});
+
+arrLeft.addEventListener('click', () => {
+    arrLeft.disabled = true;
+    offset = slides[0].offsetWidth ;
+    container.style.transition = "none";
+
+    if(slideDecrement < 0){
+        slides.forEach(slide => {
+            slide.style.order = "initial";
+        });
+
+        slideDecrement = slides.length - 1;
+    }
+    slides[slideDecrement].style.order = "-1";
+    container.style.left = -offset + 'px';
+
+    setTimeout(() => {
+        container.style.transition = "ease-in-out 500ms";
+        container.style.left = 0; 
+    },1);
+
+    setTimeout(() => {
+        slideDecrement--;
+        slideIncrement = slideDecrement + 1;
+        arrLeft.disabled = false;
+    }, 500);
+});
+
+
+//login form starts
+let loginForm = document.querySelector('.login-container')
+document.querySelector('.login').onclick = () => {
+    loginForm.classList.add('active');
+}
+
+document.querySelectorAll(".close-login-btn").forEach( (item) => item.onclick = () => {
+    loginForm.classList.remove('active');
+})
+//login form ends
+
+//card
+const page = document.getElementById("mode")
+const cart = document.getElementById("product-cart")
+const cartPage = document.getElementById("cart-page") 
+cart.onclick = ()=>{
+  cartPage.style.display = ""
+  console.log("aghareza");
+  page.style.display = "none"
+
+}
 

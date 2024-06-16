@@ -18,6 +18,12 @@
 }
 body{
     background-color: var(--white);
+    margin: 0;
+    overflow-x: hidden;
+    /* height: 100dvh;
+    display: flex;
+   justify-content: space-between;
+   flex-direction: column; */
 }
 html{
     font-size: 62.5%;   
@@ -49,6 +55,13 @@ html::-webkit-scrollbar-thumb{
 .light-color{
     color: var(--black) !important
 }
+.dark-card{
+    background-color: #757575;
+    color: var(--white);
+}
+.light-card{
+    background-color: #e5e5e5;
+}
 /* end dark/light */
 
 .header{
@@ -63,6 +76,7 @@ html::-webkit-scrollbar-thumb{
 .header .logoContent{
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 .header .logoContent .logo img{
     height: 6rem;
@@ -171,41 +185,64 @@ section{
 #productCads{
     margin-top: 50px;
     display: flex;
-    /* gap: 20px; */
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
    
 }
+.my-card{
+    /* background-color: #ccc;  */
+    width: 24rem;
+     margin: 20px;
+     border-radius: 20px;
+     overflow: hidden;
+     display: flex ; 
+     justify-content: center ;
+     align-items: center ;
+    
+}
 #cardTitle{
     font-size: 3rem;
     font-weight: bolder;
-
 }
 #cardDes{
     font-size: 15px;
 }
 #cardBtn{
+    /* margin-right: auto;
+    margin-left: auto; */
     width: 150px;
     font-size: 15px;
     background-color:  #FFBF00;
+    border-radius: 10px;
 }
+
 /* slider */
-.slider{
-    width: 500px;
+.temp{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.image-slider{
+    width: 90vw;
     position: relative;
-    height: 500px;
+    height:500px;
+    display: block;
+    margin : 100px auto 0px auto;
+    overflow: hidden;
 }
 .slider-container{
     position: absolute;
     top: 0;
     left: 0;
-    background: #eaeaea;
+    /* background: #eaeaea; */
     width: 400%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
+    gap: 0;
+
 }
 .slider-container .slide{
     width: 100%;
@@ -217,6 +254,7 @@ section{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 40px;
 }
 .slide:nth-child(1){
     background-image: url(images/1.jpg);
@@ -230,9 +268,13 @@ section{
 .slide:nth-child(4){
     background-image: url(images/4.png);
 }
+.slide h1{
+    font-size: 3em;
+    color: #fff;
+}
 .arrow-right ,.arrow-left{
     background: #000;
-    color: fff;
+    color: #fff;
     border: none;
     border-radius: 50%;
     width: 2.5em;
@@ -245,7 +287,7 @@ section{
     transition: 0.3s;
 }
 .arrow-left:hover , .arrow-right:hover{
-    background: fff;
+    background: #fff;
     color: #000;
 }
 .arrow-left{
@@ -253,6 +295,77 @@ section{
 }
 .arrow-right{
     right: 1em;
+}
+/* login */
+.login-container{
+    align-items: center;
+    justify-content: center;
+    background:rgba(255, 255, 255, 0.9);
+    position: fixed;
+    top: 0;
+    z-index: -10000;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.login-container.active{
+    right: 0;
+    display: flex;
+}
+.login-container form{
+    background: #fff;
+    border: var(--border);
+    width: 40rem;
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    border-radius: 0.5rem;
+    margin: 2rem;
+}
+.login-container form img{
+    height: 20rem;
+    width: 20rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-container form h3{
+    font-size: 2.5rem;
+    color: var(--black);
+    text-align: center;
+}
+
+.login-container form span{
+    font-size: 1.5rem;
+    display: block;
+    padding-top: 1rem;
+    color: var(--black);
+}
+
+.login-container form .box{
+    width: 100%;
+    margin: 0.7rem 0;
+    font-size: 1.6rem;
+    border: var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem 1.2rem;
+    color: var(--black);
+    direction: ltr;
+}
+
+.login-container form .btn{
+    text-align: center;
+    width: 100%;
+    margin:1.5rem 0;
+}
+
+.login-container #close-login-btn{
+    position: absolute;
+    top: 1.5rem;
+    right:2.5rem;
+    font-size: 5rem;
+    color: var(--black);
+    cursor: pointer;
 }
 
 /* footer styles */
