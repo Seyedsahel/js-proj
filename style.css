@@ -233,6 +233,7 @@ section{
     justify-content: center;
     display: flex;
     align-items: center;
+    border-radius: 40px;
 }
 .image-slider{
     width: 90vw;
@@ -241,6 +242,7 @@ section{
     display: block;
     margin : 100px auto 0px auto;
     overflow: hidden;
+    border-radius: 40px;
 }
 .slider-container{
     position: absolute;
@@ -253,6 +255,7 @@ section{
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
     gap: 0;
+    border-radius: 40px;
 
 }
 .slider-container .slide{
@@ -266,23 +269,43 @@ section{
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 40px;
+   
+    overflow: hidden;
 }
-.slide:nth-child(1){
-    background-image: url(images/1.jpg);
+
+.box {
+
+    display: flex;
+    align-items: center;
+    background-color: #e8e6e6;
+    flex-wrap: wrap;
+    border-radius: 40px;
 }
-.slide:nth-child(2){
-    background-image: url(images/2.jpg);
+.box .img{
+    flex: 1 1 45rem;
 }
-.slide:nth-child(3){
-    background-image: url(images/3.png);
+ .box .img img{
+    width: 100%;
+    padding: 5rem;
 }
-.slide:nth-child(4){
-    background-image: url(images/4.png);
+ .box .content{
+    flex: 1 1 45rem;
+    padding: 2rem;
 }
-.slide h1{
-    font-size: 3em;
-    color: #fff;
+ .box .content h3{
+    font-size: 3.5rem;
+    color: var(--black);
+    text-shadow: var(--box-shadow);
+
 }
+.box .content p{
+    font-size: 1.6rem;
+    color: var(--black);
+    padding: 1rem 0;
+    line-height: 1.8;
+    
+}
+
 .arrow-right ,.arrow-left{
     background: #000;
     color: #fff;
@@ -564,3 +587,5 @@ margin-top: 20px;
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+
+  
