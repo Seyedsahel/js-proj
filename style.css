@@ -190,6 +190,13 @@ section{
     color: var(--black);
     text-shadow: var(--box-shadow);
 }
+.notitem{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
 .carth3{
     font-size: 2rem !important; 
 }
@@ -423,6 +430,7 @@ section{
 .footer-part1 img{
     width: 7rem;
     padding: 10px;
+   
 }
 .footer-vpn-name{
     font-size: 40px;
@@ -586,6 +594,15 @@ margin-top: 20px;
   @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+  }
+  /*  */
+  .goShop{
+    font-size: 1.8rem;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: .7rem;
+    padding: .7rem 2.4rem;
+    cursor: pointer;
   }
 
   

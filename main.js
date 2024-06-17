@@ -9,7 +9,7 @@ window.onload = function() {
 const productsData = [{
   id:1,
   img:"images/1.jpg",
-  title:"Single cofee",
+  title:"Single coffee",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
   price:30
 },
@@ -252,8 +252,9 @@ const page = document.getElementById("mode")
 const cart_nav = document.getElementById("product-cart_nav")
 const cartPage = document.getElementById("cart-page") 
 const home_nav = document.getElementById("home-nav") 
-const contact_nav = document.getElementById("product-nav") 
+const product_nav = document.querySelectorAll("#product-nav") 
 const review_nav = document.getElementById("review-nav") 
+const contact_nav = document.getElementById("contact-nav") 
 
 cart_nav.onclick = ()=>{
   cartPage.style.display = ""
@@ -270,7 +271,13 @@ product_sells.forEach((e) => {
 })
 
 if(!newarray.length){
-  cart_section.innerHTML =`<h3 class="light-color carth3">Nothing To Show here</h3>`
+  factor_section.innerHTML =`<div class="notitem">
+  <h3 class="light-color carth3">Nothing To Show here</h3>
+</div>
+<div class="notitem">
+<a style="text-decoration: none;"
+href="#product"><button class="goShop" onclick="goshop()">go for shoping</button></a>
+</div>`
 }
 
 else{sellitemdis()
@@ -331,12 +338,20 @@ home_nav.onclick = () =>{
   cartPage.style.display = "none"
   page.style.display = ""
 }
-
+product_nav.forEach((e) => {e.onclick= () =>{
+  cartPage.style.display = "none"
+  page.style.display = ""
+}})
+review_nav.onclick = () =>{
+  cartPage.style.display = "none"
+  page.style.display = ""
+}
 contact_nav.onclick = () =>{
   cartPage.style.display = "none"
   page.style.display = ""
 }
-review_nav.onclick = () =>{
+
+function goshop() {
   cartPage.style.display = "none"
   page.style.display = ""
 }
