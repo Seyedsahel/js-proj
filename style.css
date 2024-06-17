@@ -598,8 +598,8 @@ margin-top: 20px;
   /*  */
   .goShop{
     font-size: 1.8rem;
-    background-color: var(--black);
-    color: var(--white);
+    background-color: #FFBF00;
+    color: var(--black);
     border-radius: .7rem;
     padding: .7rem 2.4rem;
     cursor: pointer;
