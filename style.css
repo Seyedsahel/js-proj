@@ -182,7 +182,7 @@ cursor: pointer
 section{
     padding: 2rem 7%;
 }
-.product .heading h2{
+.product .heading h2 ,h3{
     text-align: center;
     font-weight: bolder;
     font-size: 5rem;
@@ -190,7 +190,10 @@ section{
     color: var(--black);
     text-shadow: var(--box-shadow);
 }
-#productCads{
+.carth3{
+    font-size: 2rem !important; 
+}
+#productCads , #buy-product{
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
@@ -418,3 +421,4 @@ section{
     text-decoration: none;
     color: #352202;
 }
+

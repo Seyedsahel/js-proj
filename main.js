@@ -61,7 +61,7 @@ function itemdis() {
             <div class="card-body">
               <h5 id="cardTitle" class="card-title">${e.title}</h5>
               <p id="cardDes" class="card-text">${e.description}</p>
-              <a href="#" ><button id="cardBtn" class="btn">Add To Card</button></a>
+              <button id="cardBtn" class="btn" onclick="addToCart(${e.id})">Add To Card</button>
             </div>
           </div>
         `
@@ -225,6 +225,16 @@ document.querySelectorAll(".close-login-btn").forEach( (item) => item.onclick = 
 })
 //login form ends
 
+
+//add to cart
+const product_sells=[];
+
+function addToCart(e) {
+  console.log(e);
+  product_sells.push(e)
+  console.log(product_sells);
+  
+  }
 //card
 const page = document.getElementById("mode")
 const cart_nav = document.getElementById("product-cart_nav")
@@ -236,6 +246,41 @@ const review_nav = document.getElementById("review-nav")
 cart_nav.onclick = ()=>{
   cartPage.style.display = ""
   page.style.display = "none"
+  
+
+const cart_section = document.getElementById("buy-product")
+
+const newarray =[]
+
+product_sells.forEach((e) => {
+  newarray.push(productsData[e-1])
+})
+
+if(!newarray.length){
+  cart_section.innerHTML =`<h3 class="light-color carth3">Nothing To Show here</h3>`
+}
+else{sellitemdis()}
+
+
+//---------------------------
+function sellitemdis() {
+    
+    let selecteditemsHTML = newarray.map(
+        e => 
+        `
+          <div class="card my-card light-card border-0 shadow">
+            <img src="${e.img}" class="card-img-top" alt="${e.title}">
+            <div class="card-body">
+              <h5 id="cardTitle" class="card-title">${e.title}</h5>
+              <p id="cardDes" class="card-text">${e.description}</p>
+            </div>
+          </div>
+        `
+    )
+    cart_section.innerHTML = selecteditemsHTML
+}
+
+
 }
 
 home_nav.onclick = () =>{
@@ -251,3 +296,4 @@ review_nav.onclick = () =>{
   cartPage.style.display = "none"
   page.style.display = ""
 }
+
