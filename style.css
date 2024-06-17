@@ -98,7 +98,7 @@ html::-webkit-scrollbar-thumb{
     border-bottom: .1rem ;
     padding-bottom: .4rem;
 } 
-#dlmode , #Login{
+#dlmode , #Login {
 font-size: 1.8rem;
 background-color: var(--black);
 color: var(--white);
@@ -422,3 +422,145 @@ section{
     color: #352202;
 }
 
+.hr-line{
+    border-top: #666 5px solid;
+    width: 80%;
+}
+
+.hr-line-p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-cart{
+    flex-shrink: 0;
+    width: 70%;
+    /* display: flex; */
+    gap: 20px;
+    /* border: 1px solid rgb(49, 49, 49); */
+    border-radius: 16px;
+    box-shadow: 5px 5px 5px 5px rgb(97, 97, 97);
+
+    overflow: hidden;
+}
+
+
+
+.card-cart div h2{
+    margin-top: 10px;
+    color: #656565;
+}
+.card-sec{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sec-two-cart{
+    background-color: #dedcdc;
+}
+
+.Finalize{
+    font-size: 1.8rem;
+background-color: var(--black);
+color: var(--white);
+border-radius: .7rem;
+padding: .7rem 2.4rem;
+cursor: pointer;
+margin-top: 20px;
+
+}
+/* contact us */
+
+.newsletter{
+    margin-top: 100px;
+    border-radius: 40px;
+    background: url(images/bacground.jpg) no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.newsletter form{
+    max-width: 45rem;
+    text-align: center;
+    padding: 5rem 0;
+}
+.newsletter form h3{
+    font-size: 3rem;
+    color: var(--white);
+    padding-bottom: .7rem;
+}
+.newsletter form .box{
+    width: 100%;
+    margin: .7rem 0;
+    padding: 1rem 1.2rem;
+    color: var(--black);
+    border-radius: .5rem;
+}
+.newsletter form .box2{
+    width: 30%;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    padding: .5rem .5rem;
+    color: var(--black);
+    background: var(--white);
+    border-radius: 3rem;
+    cursor:pointer;
+}
+.newsletter form .box2:hover{
+    color: var(--white);
+    background-color: var(--black);
+    outline: .1rem solid var(--white);
+}
+
+/* snack bar */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#contact-snackbar , #cart-snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #FFBF00; /* Black background color */
+    color: #000; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    border-radius: 3rem;
+    font-size: 2rem;
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #contact-snackbar.show , #cart-snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

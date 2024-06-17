@@ -11,36 +11,42 @@ const productsData = [{
   img:"images/1.jpg",
   title:"Single cofee",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:30
 },
 {
   id:2,
   img:"images/2.jpg",
   title:"Pack Coffee",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:40
 },
 {
   id:3,
   img:"images/3.png",
   title:"Bubble Tea",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:50
 },
 {
   id:4,
   img:"images/4.png",
   title:"Coffee Mug",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:60
 },
 {
   id:5,
   img:"images/5.png",
   title:"Coffee",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:70
 },
 {
   id:6,
   img:"images/6.png",
   title:"Tea",
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:80
 },
 ];
 
@@ -230,9 +236,15 @@ document.querySelectorAll(".close-login-btn").forEach( (item) => item.onclick = 
 const product_sells=[];
 
 function addToCart(e) {
-  console.log(e);
+  var x = document.getElementById("cart-snackbar");
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
   product_sells.push(e)
-  console.log(product_sells);
   
   }
 //card
@@ -248,7 +260,8 @@ cart_nav.onclick = ()=>{
   page.style.display = "none"
   
 
-const cart_section = document.getElementById("buy-product")
+const cart_card_section = document.getElementById("buy-product")
+const factor_section = document.getElementById("factor-section")
 
 const newarray =[]
 
@@ -259,12 +272,22 @@ product_sells.forEach((e) => {
 if(!newarray.length){
   cart_section.innerHTML =`<h3 class="light-color carth3">Nothing To Show here</h3>`
 }
-else{sellitemdis()}
+
+else{sellitemdis()
+}
 
 
 //---------------------------
 function sellitemdis() {
-    
+  
+  let totalPrice = 0;
+  console.log(newarray);
+  for (let i = 0; i < newarray.length; i++) {
+    let Price = parseFloat(newarray[i].Price);
+  if (!isNaN(Price)) {
+    totalPrice += Price;
+  }
+  }
     let selecteditemsHTML = newarray.map(
         e => 
         `
@@ -272,12 +295,33 @@ function sellitemdis() {
             <img src="${e.img}" class="card-img-top" alt="${e.title}">
             <div class="card-body">
               <h5 id="cardTitle" class="card-title">${e.title}</h5>
-              <p id="cardDes" class="card-text">${e.description}</p>
+              <p id="cardDes" class="card-text">${e.price} $</p>
+              <button id="cardBtn" class="btn" onclick="deleteofcart()">Delete</button>
             </div>
           </div>
         `
     )
-    cart_section.innerHTML = selecteditemsHTML
+    cart_card_section.innerHTML = selecteditemsHTML
+    factor_section.innerHTML = `                   
+    <div class="hr-line-p">
+        <div class="hr-line"></div>
+    </div>  
+    <div class="card-sec">
+    <div class="light-back card-cart container text-center">
+        <div class="row">
+            <div class="col-6 my-5" >
+                <h2>Number of products: ${newarray.length}</h2>
+                <h2>total price:${totalPrice}</h2>
+                <h2>discount: 30</h2>
+              </div>
+              
+              <div class="col-6 sec-two-cart" >
+                <h2 class="my-5">The amount payable: ${totalPrice}</h2>
+                <button class="Finalize">Finalize the purchase</button>
+              </div>
+        </div>    
+        </div>   
+     </div>    `
 }
 
 
@@ -296,4 +340,15 @@ review_nav.onclick = () =>{
   cartPage.style.display = "none"
   page.style.display = ""
 }
+//contact us
+const contactBtn = document.getElementById("contact")
+contactBtn.onclick = () => {
+  var x = document.getElementById("contact-snackbar");
 
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+}
