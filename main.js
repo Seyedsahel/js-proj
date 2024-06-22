@@ -48,16 +48,64 @@ const productsData = [{
   description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
   price:80
 },
+{
+  id:2,
+  img:"images/2.jpg",
+  title:"Pack Coffee",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:40
+},
+{
+  id:1,
+  img:"images/1.jpg",
+  title:"Single coffee",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:30
+},
+{
+  id:6,
+  img:"images/6.png",
+  title:"Tea",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:80
+},
+{
+  id:5,
+  img:"images/5.png",
+  title:"Coffee",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:70
+},
+{
+  id:4,
+  img:"images/4.png",
+  title:"Coffee Mug",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:60
+},
+{
+  id:3,
+  img:"images/3.png",
+  title:"Bubble Tea",
+  description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  price:50
+},
 ];
 
 const sectionElement = document.getElementById("productCads")
+const searchParms = new URLSearchParams(window.location.search);
+current_page=searchParms.get("page")
+console.log(current_page);
+if (current_page == null){
+    current_page=1
+}
 
 itemdis()
 
 //---------------------------
 function itemdis() {
     
-    let selecteditems = productsData.slice(0,6)
+    let selecteditems = productsData.slice((current_page-1)*6,current_page*6)
     
     let selecteditemsHTML = selecteditems.map(
         e => 
@@ -67,6 +115,8 @@ function itemdis() {
             <div class="card-body">
               <h5 id="cardTitle" class="card-title">${e.title}</h5>
               <p id="cardDes" class="card-text">${e.description}</p>
+              <p id="cardDes" class="card-text">${e.price} $</p>
+
               <button id="cardBtn" class="btn" onclick="addToCart(${e.id})">Add To Card</button>
             </div>
           </div>
@@ -75,7 +125,22 @@ function itemdis() {
     sectionElement.innerHTML = selecteditemsHTML
 }
 
+
+const buttonElement = document.getElementById("button")
+
+const but_cnt = Math.ceil(productsData.length/6 )
+console.log(but_cnt);
+
+for (let i = 1; i <= but_cnt; i++) {
+    buttonElement.innerHTML += `<a href=?page=${i}#product><button class="pgbtn">${i}</button></a>` 
+}
+
+const buttons = document.querySelectorAll(".pgbtn")
+buttons[current_page-1].classList="btnselected"
+
+// -------------------------
 const imgs = document.querySelectorAll(".card-img-top")
+console.log(imgs);
 
 function ChangeImage(img) {
   
@@ -85,7 +150,7 @@ function ChangeImage(img) {
 
 function RestoreImage() {
   for (let i = 0; i < imgs.length; i++) {
-    imgs[i].src = productsData[i].img;
+    imgs[i].src = productsData.slice((current_page-1)*6,current_page*6)[i].img;
   }
 }
 // dl mode
@@ -245,6 +310,9 @@ function addToCart(e) {
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
   product_sells.push(e)
+  localStorage.setItem("product_sells", product_sells);
+  console.log(localStorage.getItem("product_sells")) 
+  // localStorage.getItem("lastname");
   
   }
 //card
@@ -367,3 +435,12 @@ contactBtn.onclick = () => {
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
 }
+// to top
+const toTop = document.querySelector(".go-top")
+window.addEventListener("scroll",() => {
+  if(window.pageYOffset > 150){
+    toTop.classList.add("active")
+  }else{
+    toTop.classList.remove("active")
+  }
+})
