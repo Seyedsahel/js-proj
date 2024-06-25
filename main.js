@@ -4,7 +4,7 @@ window.onload = function () {
   image.classList.add("slide-down");
 };
 
-let imgs
+let imgs;
 
 let productsData = [];
 fetch("./sells.json")
@@ -12,14 +12,13 @@ fetch("./sells.json")
     return response.json();
   })
   .then((data) => {
-    productsData=[...data]
-  console.log(productsData);
-  itemdis();
+    productsData = [...data];
+    console.log(productsData);
+    itemdis();
   })
   .catch((error) => {
     console.error(error);
   });
-
 
 const sectionElement = document.getElementById("productCads");
 const searchParms = new URLSearchParams(window.location.search);
@@ -29,12 +28,34 @@ if (current_page == null) {
 }
 
 //---------------------------
+//saerch
+
+let saerchQuery = "";
+const searchInput = document.getElementById("search-input");
+searchInput.onchange = () => {
+  saerchQuery = searchInput.value;
+  current_page = 1;
+  
+  searchParms.delete("page")
+  searchParms.set("page",1);
+  window.location.search.replace(searchParms)
+  itemdis();
+
+};
+
 function itemdis() {
-  let selecteditems = productsData.slice(
+  function filterItems(saerchQuery) {
+    return productsData.filter((p) => {
+      return p.title.toLowerCase().startsWith(saerchQuery.toLowerCase());
+    });
+  }
+  const filteredItems = filterItems(saerchQuery);
+  console.log(filteredItems);
+  const selecteditems = filteredItems.slice(
     (current_page - 1) * 6,
     current_page * 6
   );
-
+  console.log(selecteditems);
   let selecteditemsHTML = selecteditems.map(
     (e) =>
       `
@@ -51,23 +72,21 @@ function itemdis() {
         `
   );
   sectionElement.innerHTML = selecteditemsHTML;
-  
-const buttonElement = document.getElementById("button");
 
-const but_cnt = Math.ceil(productsData.length / 6);
+  const buttonElement = document.getElementById("button");
 
-for (let i = 1; i <= but_cnt; i++) {
-  buttonElement.innerHTML += `<a href=?page=${i}#product><button class="pgbtn">${i}</button></a>`;
+  const but_cnt = Math.ceil(filteredItems.length / 6);
+  let paginationButtons = "";
+  for (let i = 1; i <= but_cnt; i++) {
+    paginationButtons += `<a href=?page=${i}#product><button class="pgbtn">${i}</button></a>`;
+  }
+  buttonElement.innerHTML = paginationButtons;
+
+  const buttons = document.querySelectorAll(".pgbtn");
+  buttons[current_page - 1].classList = "btnselected";
+
+  imgs = document.querySelectorAll(".card-img-top");
 }
-
-const buttons = document.querySelectorAll(".pgbtn");
-buttons[current_page - 1].classList = "btnselected";
-
-imgs = document.querySelectorAll(".card-img-top");
-
-
-}
-
 
 function ChangeImage(img) {
   img.src = "images/replaceImg.jpg";
@@ -240,29 +259,25 @@ function addToCart(pid) {
   setTimeout(function () {
     x.className = x.className.replace("show", "");
   }, 3000);
-  
-let existingItemIndex = product_sells.findIndex(
-  (p) => p.product_id === pid,
-);
 
-if(existingItemIndex!==-1){
-  product_sells[existingItemIndex].count=product_sells[existingItemIndex].count+1
-}
-else{
-  product_sells.push({product_id:pid,count:1});
-}
+  let existingItemIndex = product_sells.findIndex((p) => p.product_id === pid);
+
+  if (existingItemIndex !== -1) {
+    product_sells[existingItemIndex].count =
+      product_sells[existingItemIndex].count + 1;
+  } else {
+    product_sells.push({ product_id: pid, count: 1 });
+  }
   window.localStorage.setItem("product_sells", JSON.stringify(product_sells));
 }
-//detele of cart 
-function deleteOfCart(pid){
-  let existingItemIndex = product_sells.findIndex(
-    (p) => p.product_id === pid,
-  );
-  
-  if(existingItemIndex!==-1){
-    product_sells.splice(existingItemIndex,1)
+//detele of cart
+function deleteOfCart(pid) {
+  let existingItemIndex = product_sells.findIndex((p) => p.product_id === pid);
+
+  if (existingItemIndex !== -1) {
+    product_sells.splice(existingItemIndex, 1);
     window.localStorage.setItem("product_sells", JSON.stringify(product_sells));
-    showCartList()
+    showCartList();
   }
 }
 //card
@@ -285,7 +300,7 @@ function showCartList() {
     product_sells = JSON.parse(window.localStorage.getItem("product_sells"));
   }
   product_sells.forEach((p) => {
-    newarray.push({data:productsData[p.product_id - 1],count :p.count});
+    newarray.push({ data: productsData[p.product_id - 1], count: p.count });
   });
   if (!newarray.length) {
     factor_section.innerHTML = `<div class="notitem">
@@ -301,7 +316,7 @@ href="#product"><button class="goShop" onclick="goshop()">go for shoping</button
 }
 
 cart_nav.onclick = () => {
-  showCartList()
+  showCartList();
 };
 
 function sellitemdis(newarray) {
@@ -311,8 +326,8 @@ function sellitemdis(newarray) {
   console.log(newarray);
   for (let i = 0; i < newarray.length; i++) {
     let price = parseFloat(newarray[i].data.price);
-    productCount+=newarray[i].count
-    totalPrice += price*newarray[i].count;
+    productCount += newarray[i].count;
+    totalPrice += price * newarray[i].count;
   }
   let selecteditemsHTML = newarray.map(
     (p) =>
@@ -321,9 +336,13 @@ function sellitemdis(newarray) {
           <img src="${p.data.img}" class="card-img-top" alt="${p.data.title}">
           <div class="card-body">
             <h5 id="cardTitle" class="card-title">${p.data.title}</h5>
-            <p id="cardDes" class="card-text">price : ${p.data.price*p.count} $</p>
+            <p id="cardDes" class="card-text">price : ${
+              p.data.price * p.count
+            } $</p>
             <p id="cardDes" class="card-text">count : ${p.count}</p>
-            <button id="cardBtn" class="btn bg-danger text-white" onclick="deleteOfCart(${p.data.id})">Delete</button>
+            <button id="cardBtn" class="btn bg-danger text-white" onclick="deleteOfCart(${
+              p.data.id
+            })">Delete</button>
           </div>
         </div>
       `
