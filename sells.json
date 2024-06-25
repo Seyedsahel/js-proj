@@ -1,0 +1,86 @@
+
+[{
+  "id":1,
+  "img":"images/1.jpg",
+  "title":"Single coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":30
+},
+{
+  "id":2,
+  "img":"images/2.jpg",
+  "title":"Pack Coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":40
+},
+{
+  "id":3,
+  "img":"images/3.png",
+  "title":"Bubble Tea",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":50
+},
+{
+  "id":4,
+  "img":"images/4.png",
+  "title":"Coffee Mug",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":60
+},
+{
+  "id":5,
+  "img":"images/5.png",
+  "title":"Coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":70
+},
+{
+  "id":6,
+  "img":"images/6.png",
+  "title":"Tea",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":80
+},
+{
+  "id":2,
+  "img":"images/2.jpg",
+  "title":"Pack Coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":40
+},
+{
+  "id":1,
+  "img":"images/1.jpg",
+  "title":"Single coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":30
+},
+{
+  "id":6,
+  "img":"images/6.png",
+  "title":"Tea",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":80
+},
+{
+  "id":5,
+  "img":"images/5.png",
+  "title":"Coffee",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":70
+},
+{
+  "id":4,
+  "img":"images/4.png",
+  "title":"Coffee Mug",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":60
+},
+{
+  "id":3,
+  "img":"images/3.png",
+  "title":"Bubble Tea",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nostrum illo impedit quia error assumenda ex delectus quod, obcaecati iste?",
+  "price":50
+}
+]
