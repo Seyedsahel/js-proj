@@ -227,7 +227,7 @@ document.querySelectorAll(".close-login-btn").forEach(
 //add to cart
 let product_sells = [];
 
-function addToCart(e) {
+function addToCart(pid) {
   if (productsData.length < 1) {
     product_sells = JSON.parse(window.localStorage.getItem("product_sells"));
   }
@@ -240,10 +240,30 @@ function addToCart(e) {
   setTimeout(function () {
     x.className = x.className.replace("show", "");
   }, 3000);
+  
+let existingItemIndex = product_sells.findIndex(
+  (p) => p.product_id === pid,
+);
 
-  product_sells.push(e);
+if(existingItemIndex!==-1){
+  product_sells[existingItemIndex].count=product_sells[existingItemIndex].count+1
+}
+else{
+  product_sells.push({product_id:pid,count:1});
+}
   window.localStorage.setItem("product_sells", JSON.stringify(product_sells));
-  // localStorage.getItem("lastname");
+}
+//detele of cart 
+function deleteOfCart(pid){
+  let existingItemIndex = product_sells.findIndex(
+    (p) => p.product_id === pid,
+  );
+  
+  if(existingItemIndex!==-1){
+    product_sells.splice(existingItemIndex,1)
+    window.localStorage.setItem("product_sells", JSON.stringify(product_sells));
+    showCartList()
+  }
 }
 //card
 const page = document.getElementById("mode");
@@ -253,20 +273,19 @@ const home_nav = document.getElementById("home-nav");
 const product_nav = document.querySelectorAll("#product-nav");
 const review_nav = document.getElementById("review-nav");
 const contact_nav = document.getElementById("contact-nav");
+const cart_card_section = document.getElementById("buy-product");
+const factor_section = document.getElementById("factor-section");
 
-cart_nav.onclick = () => {
+function showCartList() {
   cartPage.style.display = "";
   page.style.display = "none";
-
-  const cart_card_section = document.getElementById("buy-product");
-  const factor_section = document.getElementById("factor-section");
 
   const newarray = [];
   if (product_sells.length < 1) {
     product_sells = JSON.parse(window.localStorage.getItem("product_sells"));
   }
-  product_sells.forEach((e) => {
-    newarray.push(productsData[e - 1]);
+  product_sells.forEach((p) => {
+    newarray.push({data:productsData[p.product_id - 1],count :p.count});
   });
   if (!newarray.length) {
     factor_section.innerHTML = `<div class="notitem">
@@ -277,55 +296,56 @@ cart_nav.onclick = () => {
 href="#product"><button class="goShop" onclick="goshop()">go for shoping</button></a>
 </div>`;
   } else {
-    sellitemdis();
+    sellitemdis(newarray);
   }
+}
 
-  //---------------------------
-  function sellitemdis() {
-    let totalPrice = 0;
-    console.log(newarray);
-    for (let i = 0; i < newarray.length; i++) {
-      let Price = parseFloat(newarray[i].Price);
-      if (!isNaN(Price)) {
-        totalPrice += Price;
-      }
-    }
-    let selecteditemsHTML = newarray.map(
-      (e) =>
-        `
-          <div class="card my-card light-card border-0 shadow">
-            <img src="${e.img}" class="card-img-top" alt="${e.title}">
-            <div class="card-body">
-              <h5 id="cardTitle" class="card-title">${e.title}</h5>
-              <p id="cardDes" class="card-text">${e.price} $</p>
-              <button id="cardBtn" class="btn" onclick="deleteofcart()">Delete</button>
-            </div>
-          </div>
-        `
-    );
-    cart_card_section.innerHTML = selecteditemsHTML;
-    factor_section.innerHTML = `                   
-    <div class="hr-line-p">
-        <div class="hr-line"></div>
-    </div>  
-    <div class="card-sec">
-    <div class="light-back card-cart container text-center">
-        <div class="row">
-            <div class="col-6 my-5" >
-                <h2>Number of products: ${newarray.length}</h2>
-                <h2>total price:${totalPrice}</h2>
-                <h2>discount: 30</h2>
-              </div>
-              
-              <div class="col-6 sec-two-cart" >
-                <h2 class="my-5">The amount payable: ${totalPrice}</h2>
-                <button class="Finalize">Finalize the purchase</button>
-              </div>
-        </div>    
-        </div>   
-     </div>    `;
-  }
+cart_nav.onclick = () => {
+  showCartList()
 };
+
+function sellitemdis(newarray) {
+  let totalPrice = 0;
+  let productCount = 0;
+
+  console.log(newarray);
+  for (let i = 0; i < newarray.length; i++) {
+    let price = parseFloat(newarray[i].data.price);
+    productCount+=newarray[i].count
+    totalPrice += price*newarray[i].count;
+  }
+  let selecteditemsHTML = newarray.map(
+    (p) =>
+      `
+        <div class="card my-card light-card border-0 shadow">
+          <img src="${p.data.img}" class="card-img-top" alt="${p.data.title}">
+          <div class="card-body">
+            <h5 id="cardTitle" class="card-title">${p.data.title}</h5>
+            <p id="cardDes" class="card-text">price : ${p.data.price*p.count} $</p>
+            <p id="cardDes" class="card-text">count : ${p.count}</p>
+            <button id="cardBtn" class="btn bg-danger text-white" onclick="deleteOfCart(${p.data.id})">Delete</button>
+          </div>
+        </div>
+      `
+  );
+  cart_card_section.innerHTML = selecteditemsHTML;
+  factor_section.innerHTML = `                   
+  <div class="hr-line-p">
+      <div class="hr-line"></div>
+  </div>  
+  <div class="card-sec">
+  <div class="light-back card-cart container text-center">
+      
+          <div class="col-12 my-5" >
+              <h2>Number of products: ${productCount}</h2>
+              <h2>total price:${totalPrice} $</h2>
+              <button class="Finalize">Finalize the purchase</button>
+
+            </div>
+      
+      </div>   
+   </div>    `;
+}
 
 home_nav.onclick = () => {
   cartPage.style.display = "none";
