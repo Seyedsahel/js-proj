@@ -411,3 +411,13 @@ window.addEventListener("scroll", () => {
     toTop.classList.remove("active");
   }
 });
+//progressbar
+document.addEventListener('DOMContentLoaded', () => {
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+      const scrollAmount = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercentage = (scrollAmount / windowHeight) * 100;
+      progressBar.style.width = scrollPercentage + '%';
+  });
+});

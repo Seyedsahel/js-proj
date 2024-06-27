@@ -654,5 +654,13 @@ margin-top: 20px;
     gap: 20px;
 }
 
-  
+#progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background-color: #bd900c;
+    z-index: 1000;
+}
   
